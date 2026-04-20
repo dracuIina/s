@@ -1,6 +1,9 @@
 --!native
 --!optimize 2
 
+local offsets = loadstring(game:HttpGet("https://raw.githubusercontent.com/benzonati/Severe-Offset-Library/refs/heads/main/main.luau"))()
+
+local absrot = offsets.AbsoluteRotation
 local tc = game.Players.LocalPlayer.PlayerGui.ScreenGui.TimingCircle
 local base = tc.TimingBase
 local pin = tc.TimingPin
@@ -8,8 +11,8 @@ local pressed = false
 
 while true do
     task.wait(0.016)
-    local baseRot = memory.readf32(base, 392)
-    local pinRot = memory.readf32(pin, 392)
+    local baseRot = memory.readf32(base, absrot)
+    local pinRot = memory.readf32(pin, absrot)
 
     if baseRot > 0 then
         local diff = pinRot - baseRot
